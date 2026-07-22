@@ -56,38 +56,6 @@ The generated pose landmark data acts as the input for future modules such as:
 
 ---
 
-# System Architecture
-
-```
-Webcam Input
-      |
-      v
-Frame Preprocessing
-      |
-      v
-MediaPipe Pose Landmarker
-      |
-      v
-Landmark Extraction
-      |
-      v
-Filtering & Smoothing
-      |
-      v
-Body Analysis
-      |
-      v
-Landmark Logging / Recording
-      |
-      v
-Pose Analysis Module
-      |
-      v
-Correction & Feedback System
-```
-
----
-
 # Project Structure
 
 ```
