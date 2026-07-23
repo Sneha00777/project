@@ -1,4 +1,4 @@
-from pose_matcher import PoseMatcher
+from .pose_matcher import PoseMatcher
 
 
 class Metrics:

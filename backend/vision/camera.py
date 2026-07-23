@@ -3,6 +3,7 @@ import cv2
 from vision.pose_detector import PoseDetector #importing PoseDetector class from pose_detector.py (our own)
 from utils.logger import LandmarkLogger #importing class responsible for logging landmark data
 from recording.recorder import Recorder #importing class responsible for recording video and landmark data
+from metrices.metrices import Metrics
 
 
 class Camera:
@@ -23,6 +24,7 @@ class Camera:
         self.detector = PoseDetector() #creating different separate objects for different tasks
         self.recorder = Recorder()
         self.logger = LandmarkLogger()
+        self.metrices = Metrics()
 
     def find_available_camera(self, max_cameras=5): #searches for cameras available in the system and returns the first available camera id
 
@@ -58,6 +60,13 @@ class Camera:
 
             # Detect pose
             landmarks = self.detector.detect(frame) #input frame to give landmarks as output (uses mediapipe to detect landmarks)
+            if landmarks is not None:
+                raw_pose_data = self.metrices.analyze(
+                    landmark_data=landmarks,
+                    target_pose="tree_pose"
+                )
+
+                print(raw_pose_data)
             self.logger.log(landmarks) #stores landmarks in memory (saved in ram only, not written to disk yet)
 
             #Records landmark data if recording is active
