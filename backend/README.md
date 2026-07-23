@@ -1,212 +1,54 @@
-# PhysioVision
+# AI Yoga Pose Correction 🧘
 
-A real-time Physical Therapy & Yoga Pose Correction system using Computer Vision and Artificial Intelligence.
+A Streamlit-based web app that will use webcam input to detect and correct yoga poses in real time.
 
----
+## Current Status
 
-# Module 1 - Vision & Pose Detection
+✅ UI/Layout complete
+🔲 Pose detection model — **not yet integrated** (TODO)
 
-## Overview
+This version has the full frontend built with dummy/simulated data so the interface can be tested and demoed. The actual pose-estimation model (e.g. MediaPipe Pose) still needs to be plugged in — search for `TODO: MODEL LOGIC HERE` comments inside `App2.py` to find exactly where.
 
-The Vision & Pose Detection module is the foundation layer of PhysioVision.
+## Features (UI)
 
-This module handles real-time webcam processing, human pose detection, landmark extraction, stabilization, analysis preparation, and recording/replay capabilities.
+- Pose selector (Tadasana, Vrikshasana, Trikonasana, Bhujangasana, Warrior II)
+- Webcam feed area (currently snapshot-based via `st.camera_input`)
+- Live accuracy gauge
+- Real-time correction tips panel
+- Session stats: time held, correct reps, best streak, average accuracy
+- "Simulate Detection" button to demo feedback without a live model
 
-The generated pose landmark data acts as the input for future modules such as:
-
-- Yoga pose classification
-- Joint angle calculation
-- Posture correction
-- AI feedback generation
-
----
-
-# Features
-
-## Camera & Video Processing
-
-- Real-time webcam capture
-- Webcam device management and selection
-- Frame preprocessing pipeline
-- Image flipping for user-facing camera view
-- BGR to RGB conversion for MediaPipe processing
-
-## AI Pose Detection
-
-- Human pose detection using Google MediaPipe Pose Landmarker
-- Real-time landmark extraction
-- Professional skeleton visualization
-- Landmark coordinate processing
-
-## Landmark Processing
-
-- Landmark smoothing to reduce tracking noise
-- Visibility-based landmark filtering
-- Landmark naming and indexing system
-- Body center detection
-- Person orientation detection
-
-## Data Management
-
-- Structured landmark export
-- JSON landmark logging
-- Session recording
-- MP4 video recording
-- Pose replay with skeleton overlay
-
----
-
-# Project Structure
-
-```
-backend/
-│
-├── app.py
-│
-├── models/
-│   └── pose_landmarker.task
-│
-├── vision/
-│   ├── camera.py
-│   └── pose_detector.py
-│
-├── utils/
-│   ├── landmark_names.py
-│   ├── landmark_smoother.py
-│   ├── orientation.py
-│   └── logger.py
-│
-├── recording/
-│   ├── recorder.py
-│   └── replay.py
-│
-├── recordings/
-│
-└── requirements.txt
-```
-
----
-
-# Module Responsibilities
-
-This module is responsible for:
-
-- Capturing live webcam input
-- Preparing frames for AI inference
-- Running MediaPipe pose detection
-- Extracting human body landmarks
-- Improving landmark stability
-- Filtering unreliable landmarks
-- Detecting body position and orientation
-- Visualizing detected skeletons
-- Recording user sessions
-- Saving landmark data for future analysis
-- Replaying recorded sessions with pose overlay
-
----
-
-# Technologies Used
+## Tech Stack
 
 - Python
-- OpenCV
-- MediaPipe Tasks API
-- NumPy
+- Streamlit
+- Plotly (for the accuracy gauge)
 
----
-
-# Installation
-
-### Create virtual environment
+## Setup
 
 ```bash
-python -m venv venv
+# clone the repo
+git clone <repo-url>
+cd <repo-folder>
+
+# create/activate virtual environment
+uv venv
+.venv\Scripts\activate
+
+# install dependencies
+uv pip install -r requirements.txt
+
+# run the app
+uv run streamlit run App2.py
 ```
 
-### Activate environment
+## Next Steps
 
-Windows:
+- [ ] Integrate `streamlit-webrtc` for continuous real-time webcam feed (instead of snapshot mode)
+- [ ] Add pose-estimation model (MediaPipe Pose / OpenPose / custom model)
+- [ ] Compare detected joint angles against ideal reference angles per pose
+- [ ] Replace dummy tips/accuracy with real model output
 
-```bash
-venv\Scripts\activate
-```
+## Team
 
-### Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-# Running the Project
-
-## Start Live Pose Tracking
-
-```bash
-python app.py
-```
-
-## Replay Recorded Session
-
-```bash
-python recording/replay.py
-```
-
----
-
-# Controls
-
-| Key | Action |
-|-----|--------|
-| R | Start / Stop Recording |
-| Q | Quit Application |
-
----
-
-# Output
-
-The system generates:
-
-### Video Output
-
-- MP4 recordings of user sessions
-
-### Landmark Data
-
-JSON files containing:
-
-- Body landmark coordinates
-- Landmark visibility values
-- Frame information
-- Tracking data
-
-These outputs are designed to be consumed by future pose analysis and correction modules.
-
----
-
-# Future Integration
-
-The Vision & Pose Detection module provides the foundation for:
-
-- Yoga pose recognition
-- Joint angle calculation
-- Posture error detection
-- Real-time correction feedback
-- AI-based physical therapy assistance
-
----
-
-# Contributors
-
-## Module 1 - Vision & Pose Detection
-
-Implemented:
-
-- Webcam pipeline
-- MediaPipe integration
-- Pose landmark extraction
-- Frame preprocessing
-- Landmark filtering and smoothing
-- Body orientation detection
-- Recording and replay system
-- Landmark logging infrastructure
+_Add collaborator names here_
