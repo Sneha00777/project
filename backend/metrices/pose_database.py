@@ -2,6 +2,14 @@
 
 POSE_DATABASE = {
     # --- Standing Poses ---
+    "tadasana": {
+        "left_elbow": (160, 180),
+        "right_elbow": (160, 180),
+        "left_knee": (165, 180),
+        "right_knee": (165, 180),
+        "left_hip": (165, 180),
+        "right_hip": (165, 180),
+    },
     "tree_pose": {
         "left_elbow": (150, 180),
         "right_elbow": (150, 180),
@@ -20,6 +28,13 @@ POSE_DATABASE = {
         "right_elbow": (160, 180),
         "left_knee": (85, 105),
         "right_knee": (160, 180),
+    },
+    "trikonasana": {
+        "left_elbow": (160, 180),
+        "right_elbow": (160, 180),
+        "left_knee": (160, 180),
+        "right_knee": (160, 180),
+        "left_hip": (80, 120),
     },
     "goddess_pose": {
         "left_elbow": (80, 105),

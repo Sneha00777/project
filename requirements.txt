@@ -19,3 +19,9 @@ six==1.17.0
 sounddevice==0.5.5
 pyttsx3
 google-genai
+streamlit
+plotly
+mediapipe==0.10.35
+opencv-python-headless==5.0.0.93
+numpy==2.5.1
+pillow==12.3.0

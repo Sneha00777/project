@@ -1,3 +1,4 @@
+import os
 import cv2          #importing libraries
 import mediapipe as mp      #importing google's mediapipe library (Actual AI)
 
@@ -5,12 +6,16 @@ from utils.landmark_names import LANDMARK_NAMES
 from utils.landmark_smoother import LandmarkSmoother
 from utils.orientation import OrientationDetector
 
+# backend/vision/pose_detector.py -> parent is backend/vision, parent.parent is backend/
+_BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_MODEL_PATH = os.path.join(_BACKEND_DIR, "models", "pose_landmarker.task")
+
 
 class PoseDetector:
 
     def __init__(self):
 
-        self.model_path = "models/pose_landmarker.task"     #storing the model path
+        self.model_path = _MODEL_PATH     #absolute path, works regardless of current working directory    #storing the model path
 
         #Mediapipe classes
         BaseOptions = mp.tasks.BaseOptions
