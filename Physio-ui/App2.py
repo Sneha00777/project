@@ -27,22 +27,30 @@ import plotly.graph_objects as go
 from PIL import Image
 
 # ----------------------------------------------------------------------------
-# WIRE UP THE REAL BACKEND
+# WIRE UP THE REAL BACKEND (FIXED PATH LOOKUP)
 # ----------------------------------------------------------------------------
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-_BACKEND_DIR = os.path.join(os.path.dirname(_THIS_DIR), "backend")
-if _BACKEND_DIR not in sys.path:
-    sys.path.insert(0, _BACKEND_DIR)
+_ROOT_DIR = os.path.abspath(os.path.join(_THIS_DIR, ".."))
+_BACKEND_DIR = os.path.join(_ROOT_DIR, "backend")
+
+for path in [_ROOT_DIR, _BACKEND_DIR]:
+    if path not in sys.path:
+        sys.path.insert(0, path)
 
 BACKEND_AVAILABLE = True
 BACKEND_ERROR = ""
 try:
     import cv2
-    from vision.pose_detector import PoseDetector
-    from metrices.metrices import Metrics
-except Exception as e:
-    BACKEND_AVAILABLE = False
-    BACKEND_ERROR = str(e)
+    from backend.vision.pose_detector import PoseDetector
+    from backend.metrices.metrices import Metrics
+except Exception as e1:
+    try:
+        import cv2
+        from vision.pose_detector import PoseDetector
+        from metrices.metrices import Metrics
+    except Exception as e2:
+        BACKEND_AVAILABLE = False
+        BACKEND_ERROR = f"Primary: {e1} | Secondary: {e2}"
 
 
 @st.cache_resource(show_spinner="Loading pose model (first time only)...")
